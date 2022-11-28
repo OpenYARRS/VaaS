@@ -30,6 +30,7 @@ module.exports = {
     'react/jsx-filename-extension': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/no-explicit-any': 0,
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'prettier/prettier': 'error',

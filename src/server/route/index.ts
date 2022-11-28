@@ -5,9 +5,11 @@ import prom from './endpoints/prom';
 import faas from './endpoints/faas';
 import gateway from './endpoints/gateway';
 import alert from './endpoints/alert';
-import github from './endpoints/github'; 
+import github from './endpoints/github';
 import gcheck from './endpoints/gcheck';
 
+// Import in all the endpoints from the endpoints folder and export them as a single object
+// The idea is to improve readability and modularity
 export default {
   auth,
   user,
@@ -16,6 +18,6 @@ export default {
   faas,
   gateway,
   alert,
-  github, 
-  gcheck
+  github,
+  gcheck,
 };

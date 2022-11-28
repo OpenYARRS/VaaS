@@ -1,13 +1,8 @@
-declare module "react-graph-vis" {
-  import { Network, NetworkEvents, Options, Node, Edge, DataSet } from "vis";
-  import { Component } from "react";
+declare module 'react-graph-vis' {
+  import { Network, NetworkEvents, Options, Node, Edge, DataSet } from 'vis';
+  import { Component } from 'react';
 
-  // export { Network, NetworkEvents, Options, Node, Edge, DataSet } from "vis";
-
-  // export interface graphEvents {
-  //   [event: NetworkEvents]: (params?: any) => void;
-  // }
-
+  // Declare interfaces for the visualizer graph
   export interface graphData {
     nodes: Node[];
     edges: Edge[];

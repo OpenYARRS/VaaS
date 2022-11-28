@@ -10,7 +10,7 @@ module.exports = {
   entry: ['./src/client/index.tsx'],
   output: {
     path: path.join(__dirname, outputDirectory),
-    filename: './js/[name].bundle.js'
+    filename: './js/[name].bundle.js',
   },
   devtool: 'source-map',
   module: {
@@ -19,22 +19,22 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.tsx?$/,
         use: [
           {
-            loader: 'ts-loader'
+            loader: 'ts-loader',
           },
         ],
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         enforce: 'pre',
         test: /\.js$/,
-        loader: 'source-map-loader'
+        loader: 'source-map-loader',
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
@@ -42,22 +42,22 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 1000
-            }
-          }
-        ]
+              limit: 1000,
+            },
+          },
+        ],
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
-    ]
+    ],
   },
   resolve: {
     extensions: ['*', '.ts', '.tsx', '.js', '.jsx', '.json'],
     fallback: {
-      "fs": false
-    }
+      fs: false,
+    },
   },
   devServer: {
     port: 9000,
@@ -68,9 +68,9 @@ module.exports = {
       '/api/**/*': {
         target: 'http://localhost:3020',
         secure: false,
-        changeOrigin: true
-      }
-    }
+        changeOrigin: true,
+      },
+    },
   },
   plugins: [
     new CleanWebpackPlugin({ outputDirectory }),

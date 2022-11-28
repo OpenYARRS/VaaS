@@ -4,11 +4,7 @@ import jwtCreator from './jwtCreator';
 import jwtVerify from './jwtVerify';
 import gitAccessToken from './gitAccessToken';
 import gitAuthUser from './gitAuthUser';
-export {
-  authUser,
-  bcrypt,
-  jwtCreator,
-  jwtVerify,
-  gitAccessToken,
-  gitAuthUser
-};
+
+// Coalesce all middlewares into a single object for export
+// Idea is to improve the code's readability and modularity
+export { authUser, bcrypt, jwtCreator, jwtVerify, gitAccessToken, gitAuthUser };

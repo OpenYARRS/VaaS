@@ -1,8 +1,9 @@
 import { GateWayQuery } from '../Services/Query';
 
+// Outlines a store containing a single OpenFaaS metric and the function used to query it
+
 const openFaasMetric = {
   avgTimePerInvoke: async (clusterId: string, type: string, query: string) => {
-
     try {
       console.log('TYPE IS', type);
       console.log('query is:', query);
@@ -11,13 +12,11 @@ const openFaasMetric = {
 
       // need to adjust here depending on how we want to display data
       return metric;
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
-  }
-  // 
+  },
+  //
 };
-
 
 export default openFaasMetric;

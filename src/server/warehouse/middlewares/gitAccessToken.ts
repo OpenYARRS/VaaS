@@ -2,43 +2,53 @@ import { Request, Response } from 'express';
 import { User } from '../../models';
 import { IError } from '../../interfaces/IError';
 import { terminal } from '../../services/terminal';
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
 import 'dotenv';
 
-export default async (req: Request, res: Response, next: (param?: unknown) => void): Promise<void | Response<any, Record<string, any>>> => {
+// Middleware to verify a user's Github access token
+export default async (
+  req: Request,
+  res: Response,
+  next: (param?: unknown) => void
+): Promise<void | Response<any, Record<string, any>>> => {
   terminal(`Received ${req.method} request at 'gitAccessToken' middleware`);
-  // grab code from body
+
+  // Pull code from the request body
   const { code } = req.body;
-  // make make post request to github to get accesstoken
+
   try {
     const gitClientID = process.env.GITHUB_CLIENT_ID;
     const gitSecret = process.env.GITHUB_SECRET;
 
-    const accessToken = await fetch(`https://github.com/login/oauth/access_token?client_id=${gitClientID}&client_secret=${gitSecret}&code=${code}`,
+    // Send a POST request to Github to exchange the code for an access token
+    const accessToken = await fetch(
+      `https://github.com/login/oauth/access_token?client_id=${gitClientID}&client_secret=${gitSecret}&code=${code}`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          'Accept': 'application/json',
-        }
+          Accept: 'application/json',
+        },
       }
     ).then((res) => res.json());
-    // store token and return next
-    res.locals.accessToken = accessToken;
-    terminal(`Success: GithubToken received: ${res.locals.accessToken.access_token}`);
 
-    // using token to request for userInfo
+    // Store the access token
+    res.locals.accessToken = accessToken;
+    terminal(
+      `Success: GithubToken received: ${res.locals.accessToken.access_token}`
+    );
+
+    // Use the token to request userInfo
     const { access_token, token_type } = res.locals.accessToken;
     const authHeader = `${token_type} ${access_token}`;
-    const gitHubData = await fetch(`https://api.github.com/user`,
-      {
-        method: 'GET',
-        headers: {
-          "Authorization": authHeader,
-        }
-      }).then((res => res.json()));
+    const gitHubData = await fetch(`https://api.github.com/user`, {
+      method: 'GET',
+      headers: {
+        Authorization: authHeader,
+      },
+    }).then((res) => res.json());
     console.log(`USER DATA IS : `, gitHubData);
 
-    // set up acct info and return next 
+    // Set up account information
     // eslint-disable-next-line prefer-const
     let { name, login, id } = gitHubData;
     const firstName = name.split(' ')[0];
@@ -52,34 +62,45 @@ export default async (req: Request, res: Response, next: (param?: unknown) => vo
       darkMode: false,
     };
 
+    // Store the new account information
     res.locals.newAcctInfo = newAcctInfo;
     const { username } = newAcctInfo;
-    // checking if acct exist in db 
+
     terminal(`Searching for user [${username}] in MongoDB`);
+
+    // Attempt to find the user in the database
     const user = await User.find({ username: username });
     terminal(`Success: MongoDB query executed [${username}]`);
     console.log(user);
+
+    // User found
     if (user[0]) {
       terminal(`Success: User [${username}] found in DB`);
+
+      // Store information
       res.locals.hasAcct = true;
       res.locals.user = user[0];
+
+      // Move on to the next middleware
       return next();
-    }
-    else {
+
+      // User not found
+    } else {
       const error: IError = {
         status: 401,
         message: 'Invalid credentials',
-        invalid: true
+        invalid: true,
       };
       terminal(`Fail: ${error.message}`);
       res.locals.hasAcct = false;
       return next();
     }
-  }
-  catch (err) {
+
+    // Error handling
+  } catch (err) {
     const error: IError = {
       status: 500,
-      message: `Unable to fulfill ${req.method} request: ${err}`
+      message: `Unable to fulfill ${req.method} request: ${err}`,
     };
     terminal(`Fail: ${error.message}`);
     return res.status(error.status).json(error);

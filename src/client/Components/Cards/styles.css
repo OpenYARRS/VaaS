@@ -10,7 +10,7 @@ dt {
   color: rgb(58, 79, 118);
 }
 dt::after {
-  content: ":";
+  content: ':';
 }
 dd {
   margin: 0 0 0 80px;

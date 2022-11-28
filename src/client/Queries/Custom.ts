@@ -1,6 +1,7 @@
 import { Query } from '../Services';
 
-// custom prom ql
+// Outlines a store containing a custom PromQL metric and the function used to query it
+
 const customMetric = async (clusterId: string, ns: string, query: string) => {
   try {
     const metric = await Query(clusterId, ns, query);

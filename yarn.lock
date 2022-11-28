@@ -3337,6 +3337,11 @@
   "resolved" "https://registry.npmjs.org/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz"
   "version" "0.0.3"
 
+"@types/uuid@^8.3.4":
+  "integrity" "sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw=="
+  "resolved" "https://registry.npmjs.org/@types/uuid/-/uuid-8.3.4.tgz"
+  "version" "8.3.4"
+
 "@types/vis@^4.21.24":
   "integrity" "sha512-TxL/7pT9JQVC3HA/r+Weck+kvcmJ59EGu8CMK92mJOS363+aHCuyo43Pj+t6Gfv6+8DgVuGlNPSUWuEPvypO8A=="
   "resolved" "https://registry.npmjs.org/@types/vis/-/vis-4.21.24.tgz"

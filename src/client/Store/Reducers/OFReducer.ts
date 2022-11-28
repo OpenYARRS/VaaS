@@ -1,13 +1,14 @@
-import * as types from "../actionTypes";
-import { IOFAction } from "../../Interfaces/IAction";
-import { IOFReducer } from "../../Interfaces/IReducers";
+import * as types from '../actionTypes';
+import { IOFAction } from '../../Interfaces/IAction';
+import { IOFReducer } from '../../Interfaces/IReducers';
 
+// Reducer functions to update the OpenFaaS state
 
 const initialState: IOFReducer = {
   selectedDeployedFunction: '',
   selectedOpenFaaSFunction: '',
   openFaaSFunctions: [],
-  deployedFunctions: []
+  deployedFunctions: [],
 };
 
 const OFReducer = (state: IOFReducer = initialState, action: IOFAction) => {
@@ -15,7 +16,7 @@ const OFReducer = (state: IOFReducer = initialState, action: IOFAction) => {
     case types.GET_OFFunc: {
       return {
         ...state,
-        openFaaSFunctions: action.payload
+        openFaaSFunctions: action.payload,
       };
     }
     case types.GET_DeployedOFFunc: {
@@ -24,7 +25,7 @@ const OFReducer = (state: IOFReducer = initialState, action: IOFAction) => {
       // if (state.clusterOpenFaaSData[action.payload.clusterId as string]) {
       return {
         ...state,
-        deployedFunctions: action.payload
+        deployedFunctions: action.payload,
       };
     }
 

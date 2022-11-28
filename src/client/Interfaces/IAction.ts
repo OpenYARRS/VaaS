@@ -1,3 +1,4 @@
+// Declare basic interfaces for the various Actions
 export interface IAction {
   type: string;
   payload: any;
@@ -9,8 +10,8 @@ export interface IClusterAction {
 }
 
 export interface IClusterPayload {
-  clusterId: string,
-  clusterMetrics: IClusterMetrics
+  clusterId: string;
+  clusterMetrics: IClusterMetrics;
 }
 
 export interface IClusterMetrics {
@@ -30,27 +31,26 @@ export interface IClusterUIAction {
 }
 
 export interface IClusterUIPayload {
-  clusterId?: string,
-  clusterUIState?: IClusterUIState
-  darkMode?: boolean
+  clusterId?: string;
+  clusterUIState?: IClusterUIState;
+  darkMode?: boolean;
 }
 
 export interface IClusterUIState {
-  clusterId?: string,
-  currentModule: string,
-  fullscreen: boolean,
-  modules: any,
-  darkmode?: boolean,
+  clusterId?: string;
+  currentModule: string;
+  fullscreen: boolean;
+  modules: any;
+  darkmode?: boolean;
 }
 
 export interface IOFAction {
   type: string;
-  payload: string | []
+  payload: string | [];
 }
 export interface IOFPayload {
-  selectedDeployedFunction?: string,
-  selectedOpenFaaSFunction?: string,
-  openFaaSFunctions?: [],
-  deployedFunctions?: []
+  selectedDeployedFunction?: string;
+  selectedOpenFaaSFunction?: string;
+  openFaaSFunctions?: [];
+  deployedFunctions?: [];
 }
-

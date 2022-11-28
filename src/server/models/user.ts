@@ -1,16 +1,24 @@
 import { Schema } from 'mongoose';
 import Database from '../mongoDb';
 import { IUser } from '../interfaces/IUser';
-const { mongo: { model } } = Database;
+const {
+  mongo: { model },
+} = Database;
 
+// Create the user schema
 const userSchema: Schema<IUser> = new Schema<IUser>({
-  _id: {type: Schema.Types.ObjectId, required: true},
+  // Basic user information
+  _id: { type: Schema.Types.ObjectId, required: true },
   firstName: String,
   lastName: String,
   username: String,
   password: String,
+
+  // Dark mode preference
   darkMode: Boolean,
-  refreshRate: Number
+
+  // How often to refresh the dashboard?
+  refreshRate: Number,
 });
 
 // THIRD PARAMETER DEFINES DEFAULT COLLECTION NAME

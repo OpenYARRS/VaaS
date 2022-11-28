@@ -1,3 +1,4 @@
+// Declare interfaces for OpenFaaS functions
 export interface FunctionTypes {
   title: string;
   name: string;
@@ -15,6 +16,4 @@ export interface DeployedFunctionTypes {
   replicas: number;
   invocationCount: number;
   image: string;
-
 }
-
